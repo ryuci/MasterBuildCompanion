@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickButtonFrac(View view) {
-        calc.inputKey(ConstructionCalculator.FRC);
+        calc.inputKey(ConstructionCalculator.FRAC);
         display.setText(calc.getPrmScreenText());
     }
 
@@ -233,25 +233,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickButtonFeet(View view) {
-        calc.inputKey(ConstructionCalculator.FET);
+        calc.inputKey(ConstructionCalculator.FEET);
         display.setText(calc.getPrmScreenText());
         if (buttonsDisabled) enableButtons();
     }
 
     public void onClickButtonInch(View view) {
-        calc.inputKey(ConstructionCalculator.INC);
+        calc.inputKey(ConstructionCalculator.INCH);
         display.setText(calc.getPrmScreenText());
         if (buttonsDisabled) enableButtons();
     }
 
     public void onClickButtonMeter(View view) {
-        calc.inputKey(ConstructionCalculator.MTR);
+        calc.inputKey(ConstructionCalculator.M);
         display.setText(calc.getPrmScreenText());
         if (buttonsDisabled) enableButtons();
     }
 
     public void onClickButtonConv(View view) {
-        calc.inputKey(ConstructionCalculator.CON);
+        calc.inputKey(ConstructionCalculator.CONV);
         display.setText(calc.getPrmScreenText());
         disableButtons(0xf3, 0xe7, 0xf7, 0xef, 0xff);
         ((Button)buttonView[4][1]).setText("cm");
@@ -365,7 +365,7 @@ public class MainActivity extends AppCompatActivity {
     // Numeric
     public void onClickButton7(View view)
     {
-        calc.inputKey(buttonsDisabled ? ConstructionCalculator.CMT : ConstructionCalculator.DG7);
+        calc.inputKey(buttonsDisabled ? ConstructionCalculator.CM : ConstructionCalculator.DG7);
         display.setText(calc.getPrmScreenText());
         if (buttonsDisabled) enableButtons();
 
@@ -381,7 +381,7 @@ public class MainActivity extends AppCompatActivity {
     // Numeric
     public void onClickButton9(View view)
     {
-        calc.inputKey(buttonsDisabled ? ConstructionCalculator.MMT : ConstructionCalculator.DG9);
+        calc.inputKey(buttonsDisabled ? ConstructionCalculator.MM : ConstructionCalculator.DG9);
         display.setText(calc.getPrmScreenText());
         if (buttonsDisabled) enableButtons();
 

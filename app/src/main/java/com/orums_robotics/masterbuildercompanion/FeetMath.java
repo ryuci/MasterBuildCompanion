@@ -7,7 +7,6 @@ import java.util.Map;
 /**
  * Created by ryuci on 15. 10. 3..
  */
-
 public class FeetMath {
     // independent variable
     private double inches;
@@ -24,9 +23,11 @@ public class FeetMath {
     private static final double M2IN = 39.370079;
     private static final double YD2M = 0.9144;
     private static final double YD2IN = 36;
-    public static final String INCH = "IN";
-    public static final String M = "M";
-    public static final String YDS = "YDS";
+    public static final String INCH = "\"";
+    public static final String M = "m";
+    public static final String CM = "cm";
+    public static final String MM = "mm";
+    public static final String YDS = "yds";
 
     public FeetMath(String encodedValue)
     {
@@ -42,6 +43,7 @@ public class FeetMath {
         mm = cm * 10;
         yds = inches * IN2YD;
     }
+
     public FeetMath(double feet, double inch, double fraction)
     {
         this.feet = feet;
@@ -54,20 +56,40 @@ public class FeetMath {
         yds = inches * IN2YD;
         encodedValue = encode(inches);
     }
+
+    public FeetMath(String length, String unit)
+    {
+        this(Double.parseDouble(length), unit);
+    }
+
     public FeetMath(double length, String unit)
     {
         switch (unit) {
             case INCH:
                 inches = length;
                 m = inches * IN2M;
-                cm = m * 100;
-                mm = cm * 10;
+                cm = m * 100.;
+                mm = cm * 10.;
                 yds = inches * IN2YD;
                 break;
             case M:
                 m = length;
-                cm = m * 100;
-                mm = cm * 10;
+                cm = m * 100.;
+                mm = cm * 10.;
+                inches = m * M2IN;
+                yds = m * M2YD;
+                break;
+            case CM:
+                cm = length;
+                m = cm * 100.;
+                mm = m / 1000.;
+                inches = m * M2IN;
+                yds = m * M2YD;
+                break;
+            case MM:
+                mm = length;
+                m = mm * 1000.;
+                cm = m / 100.;
                 inches = m * M2IN;
                 yds = m * M2YD;
                 break;
@@ -75,8 +97,8 @@ public class FeetMath {
                 yds = length;
                 inches = yds * YD2IN;
                 m = yds * YD2M;
-                cm = m * 100;
-                mm = cm * 10;
+                cm = m * 100.;
+                mm = cm * 10.;
                 break;
         }
         encodedValue = encode(inches);
