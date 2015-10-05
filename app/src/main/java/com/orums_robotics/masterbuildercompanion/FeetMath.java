@@ -7,6 +7,7 @@ import java.util.Map;
 /**
  * Created by ryuci on 15. 10. 3..
  */
+
 public class FeetMath {
     // independent variable
     private double inches;
@@ -102,6 +103,7 @@ public class FeetMath {
         return yds;
     }
 
+    // Encode decimal inch value to {feet}' {inch}" {fraction1}/{fraction2} format of String
     public String encode(double inches)
     {
         int intValue;
@@ -135,8 +137,8 @@ public class FeetMath {
             if (intValue2 == 16) {
                 ret += suffix + (intValue+1) + "\"";
             } else if (intValue2 != 0) {
-                ret += suffix + intValue; 		// retarded execution
-                ret += suffix + intValue2 + "/16\"";
+                ret += suffix + intValue + "\""; 		// retarded execution
+                ret += suffix + intValue2 + "/16";
             }
             else {
                 if (intValue != 0) {
@@ -194,7 +196,7 @@ public class FeetMath {
         return new FeetMath(inches / toInches(value,unit), INCH);
     }
 
-    // expected value format: {feet}' {inch} {fraction1}/{fraction2}"
+    // expected value format: {feet}' {inch}" {fraction1}/{fraction2}
     private Map<String,Double> decode(String valueFormatted)
     {
         Map<String,Double> ret = new HashMap<String,Double>();
@@ -217,7 +219,7 @@ public class FeetMath {
             return ret;
         }
         else {
-            // 1" or 1 1/8" or 1/8"
+            // 1" or 1" 1/8 or 1/8"
             idx = valueFormatted.indexOf(" ");
             if (idx == -1) {
                 // 1" or 1/8"
@@ -234,9 +236,9 @@ public class FeetMath {
                     ret.put("inch",  0.0);
                 }
             } else {
-                // 1 1/8"
+                // 1" 1/8
                 // get inch now and get fraction later
-                ret.put("inch", Double.parseDouble(valueFormatted.substring(0, idx)));
+                ret.put("inch", Double.parseDouble(valueFormatted.substring(0, idx-1)));
                 valueFormatted = valueFormatted.substring(idx, valueFormatted.length()).trim();
             }
         }
@@ -252,8 +254,7 @@ public class FeetMath {
         else {
             fraction1 = Double.parseDouble(valueFormatted.substring(0, idx));
             valueFormatted = valueFormatted.substring(idx+1, valueFormatted.length()).trim();
-            idx = valueFormatted.indexOf("\"");
-            fraction2 = Double.parseDouble(valueFormatted.substring(0, idx));
+            fraction2 = Double.parseDouble(valueFormatted);
             ret.put("fraction", fraction1/fraction2);
         }
         return ret;
@@ -283,12 +284,14 @@ public class FeetMath {
 
     static public void runFeetMathEx()
     {
-        String format = "\t{0}\n\t{1} inches\n\t{2} meters\n\t{3} yds\n";
+        String format = "\t{0}\n\t{1} inches\n\t{2} meters\n\t{3} cm\n\t{4} mm\n\t{5} yds\n";
         FeetMath a = new FeetMath("13' 5\"");
         System.out.println("a:\n"+ MessageFormat.format(format,
                 a,
                 a.getInches(),
                 a.getMeter(),
+                a.getCentiMeter(),
+                a.getMilliMeter(),
                 a.getYds()));
 
         FeetMath b = new FeetMath(a.getInches(),INCH);
@@ -296,6 +299,8 @@ public class FeetMath {
                 b,
                 b.getInches(),
                 b.getMeter(),
+                b.getCentiMeter(),
+                b.getMilliMeter(),
                 b.getYds()));
 
         FeetMath c = a.add(10,INCH);
@@ -303,6 +308,8 @@ public class FeetMath {
                 c,
                 c.getInches(),
                 c.getMeter(),
+                c.getCentiMeter(),
+                c.getMilliMeter(),
                 c.getYds()));
 
         FeetMath d = a.multiply(10,INCH);
@@ -310,6 +317,8 @@ public class FeetMath {
                 d,
                 d.getInches(),
                 d.getMeter(),
+                d.getCentiMeter(),
+                d.getMilliMeter(),
                 d.getYds()));
 
         FeetMath e = new FeetMath(a.getInches(),INCH).add(0.1, INCH);
@@ -317,7 +326,19 @@ public class FeetMath {
                 e,
                 e.getInches(),
                 e.getMeter(),
+                e.getCentiMeter(),
+                e.getMilliMeter(),
                 e.getYds()));
+
+        FeetMath f = new FeetMath("13' 5\" 1/16");
+        System.out.println("a:\n"+ MessageFormat.format(format,
+                a,
+                a.getInches(),
+                a.getMeter(),
+                a.getCentiMeter(),
+                a.getMilliMeter(),
+                a.getYds()));
+
 
         if (a == b)
             System.out.println("a,b - same");
