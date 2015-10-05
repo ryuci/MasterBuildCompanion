@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MasterBuilderCompanion</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="welcomemsg">Welcome to AndroidStudio</string>
+    <string name="button_string">Press Me</string>
+    <string name="title_activity_roof_numbers">Roof Numbers</string>
+</resources>
