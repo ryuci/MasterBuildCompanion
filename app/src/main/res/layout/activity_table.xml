@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.orums_robotics.masterbuildercompanion.TableActivity">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="계단 수치"
+            android:layout_gravity="center_horizontal"
+            android:textSize="30sp"
+            android:textIsSelectable="true"
+            android:textStyle="bold"
+            android:typeface="normal" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="수직판 높이(R-HT)"
+                        android:id="@+id/textView6"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/textView7"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="전체 높이(RISE)"
+                        android:id="@+id/textView8"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/textView9"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="수직판 갯수(RSRS)"
+                        android:id="@+id/textView10"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/textView11"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="수직판 오차(R+/-)"
+                        android:id="@+id/textView13"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/textView14"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="디딤판 너비(T-WD)"
+                        android:id="@+id/textView15"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/textView16"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="350dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="디딤판 갯수(TRDS)"
+                        android:id="@+id/textView17"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/textView18"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="디딤판 오차(T+/-)"
+                        android:id="@+id/textView19"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/textView20"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="개구부 크기(OPEN)"
+                        android:id="@+id/textView21"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/textView22"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="스트링거 길이(STRG)"
+                        android:id="@+id/textView23"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/textView24"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="계단 각도(INCL)"
+                        android:id="@+id/textView25"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text=""
+                        android:id="@+id/textView26"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="전체 너비(RUN)"
+                        android:id="@+id/textView27"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/textView28"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:paddingRight="10dp" />
+                </TableRow>
+            </TableLayout>
+
+
+
+
+        </TableLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="닫기"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:onClick="onClickButtonCloseDlg" />
+    </LinearLayout>
+</RelativeLayout>

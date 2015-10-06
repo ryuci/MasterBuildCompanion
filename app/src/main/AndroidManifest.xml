@@ -20,6 +20,8 @@
             android:name=".RoofNumbersActivity"
             android:label="@string/title_activity_roof_numbers" >
         </activity>
+        <activity android:name=".TableActivity" >
+        </activity>
     </application>
 
 </manifest>
