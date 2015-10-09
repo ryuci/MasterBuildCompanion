@@ -16,10 +16,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int[][] buttonIdMap = {
+            {R.id.button_dummy1, R.id.button_dummy1, R.id.button_dummy1, R.id.button_off, R.id.button_c},
             {R.id.button_pitch, R.id.button_rise, R.id.button_run, R.id.button_diag, R.id.button_hipV},
             {R.id.button_comp, R.id.button_stair, R.id.button_arc, R.id.button_circ, R.id.button_jack},
             {R.id.button_m, R.id.button_length, R.id.button_width, R.id.button_height, R.id.button_percent},
@@ -28,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
             {R.id.button_store, R.id.button_4, R.id.button_5, R.id.button_6, R.id.button_mul},
             {R.id.button_rcl, R.id.button_1, R.id.button_2, R.id.button_3, R.id.button_sub},
             {R.id.button_mplus, R.id.button_0, R.id.button_dot, R.id.button_equal, R.id.button_add}};
-    private int[][] textColor = new int[8][5];
-    private View[][] buttonView = new View[8][5];
-
+    private Button[][] buttonView = new Button[9][5];
+    private String[][] buttonText = new String[9][5];
+    private int[][] buttonTextColor = new int[9][5];
     private Calculator calc = new ConstructionCalculator();
     private TextView firstScreen;
     private TextView secondScreen;
@@ -52,24 +56,17 @@ public class MainActivity extends AppCompatActivity {
         firstScreen = (TextView) findViewById(R.id.textView);
         secondScreen = (TextView)findViewById(R.id.textView5);
 
-        // Save button view reference for future reference
-        for (int i = 0; i < 8; i++) {
-            buttonView[i][0] = findViewById(buttonIdMap[i][0]);
-            buttonView[i][1] = findViewById(buttonIdMap[i][1]);
-            buttonView[i][2] = findViewById(buttonIdMap[i][2]);
-            buttonView[i][3] = findViewById(buttonIdMap[i][3]);
-            buttonView[i][4] = findViewById(buttonIdMap[i][4]);
+        for (int i = 0; i < 9; i++)
+            for (int j = 0; j < 5; j++) {
+                // Save button view reference for future reference
+                buttonView[i][j] = (Button)findViewById(buttonIdMap[i][j]);
+                // Save text
+                buttonText[i][j] = (String)buttonView[i][j].getText();
+                // Save text colors
+                buttonTextColor[i][j] = buttonView[i][j].getCurrentHintTextColor();
+                //
+                buttonView[i][j].setOnClickListener(onClickListener);
         }
-
-        // Save text colors assigned in layout file
-        for (int i = 0; i < 8; i++) {
-            textColor[i][0] = ((Button)buttonView[i][0]).getCurrentTextColor();
-            textColor[i][1] = ((Button)buttonView[i][1]).getCurrentTextColor();
-            textColor[i][2] = ((Button)buttonView[i][2]).getCurrentTextColor();
-            textColor[i][3] = ((Button)buttonView[i][3]).getCurrentTextColor();
-            textColor[i][4] = ((Button)buttonView[i][4]).getCurrentTextColor();
-        }
-
     }
 
     @Override
@@ -153,12 +150,65 @@ public class MainActivity extends AppCompatActivity {
     @Override
     // Process app exit initiated by pressing back button
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) onClickButtonOff(null);
+        if (keyCode == KeyEvent.KEYCODE_BACK) finishApp();
         return false;
     }
 
+    Button.OnClickListener onClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            String key;
+            switch (v.getId()) {
+                case R.id.button_off: finishApp(); break;
+
+                case R.id.button_c: calc.inputKey(ConstructionCalculator.CXX); printScreen(); if (buttonsDisabled) enableButtons(); break;
+                case R.id.button_back: calc.inputKey(ConstructionCalculator.BSP); printScreen(); break;
+
+                case R.id.button_0: calc.inputKey(ConstructionCalculator.DG0); printScreen(); break;
+                case R.id.button_1: calc.inputKey(ConstructionCalculator.DG1); printScreen(); break;
+                case R.id.button_2: calc.inputKey(ConstructionCalculator.DG2); printScreen(); break;
+                case R.id.button_3: calc.inputKey(ConstructionCalculator.DG3); printScreen(); break;
+                case R.id.button_4: calc.inputKey(ConstructionCalculator.DG4); printScreen(); break;
+                case R.id.button_5: calc.inputKey(ConstructionCalculator.DG5); printScreen(); break;
+                case R.id.button_6: calc.inputKey(ConstructionCalculator.DG6); printScreen(); break;
+                case R.id.button_7: calc.inputKey(ConstructionCalculator.DG7); printScreen(); break;
+                case R.id.button_8: calc.inputKey(ConstructionCalculator.DG8); printScreen(); break;
+                case R.id.button_9: calc.inputKey(ConstructionCalculator.DG9); printScreen(); break;
+                case R.id.button_dot: calc.inputKey(ConstructionCalculator.DOT); printScreen(); break;
+
+                case R.id.button_equal: calc.inputKey(ConstructionCalculator.EQU); printScreen(); break;
+                case R.id.button_add: calc.inputKey(ConstructionCalculator.ADD); printScreen(); break;
+                case R.id.button_sub: calc.inputKey(ConstructionCalculator.SUB); printScreen(); break;
+                case R.id.button_mul: calc.inputKey(ConstructionCalculator.MUL); printScreen(); break;
+                case R.id.button_div: calc.inputKey(ConstructionCalculator.DIV); printScreen(); break;
+
+                case R.id.button_feet: calc.inputKey(ConstructionCalculator.FEET); printScreen(); if (buttonsDisabled) enableButtons(); break;
+                case R.id.button_inch: calc.inputKey(ConstructionCalculator.INCH); printScreen(); if (buttonsDisabled) enableButtons(); break;
+                case R.id.button_m: calc.inputKey(ConstructionCalculator.M); printScreen(); if (buttonsDisabled) enableButtons(); break;
+                case R.id.button_yds: calc.inputKey(ConstructionCalculator.YDS); printScreen(); if (buttonsDisabled) enableButtons(); break;
+                case R.id.button_to: calc.inputKey(ConstructionCalculator.FRAC); printScreen(); if (buttonsDisabled) enableButtons(); break;
+
+                case R.id.button_conv: handleConv(); break;
+
+                case R.id.button_stair: calc.inputKey(ConstructionCalculator.STAIR); printStairResult(); break;
+
+                case R.id.button_store: calc.inputKey(ConstructionCalculator.MSX); printStairResult(); break;
+                case R.id.button_rcl: calc.inputKey(ConstructionCalculator.MRX); printStairResult(); break;
+                case R.id.button_mplus: calc.inputKey(ConstructionCalculator.MPX); printStairResult(); break;
+            }
+        }
+    };
+
+    //
+    private void handleConv() {
+        calc.inputKey(ConstructionCalculator.CONV);
+        firstScreen.setText(calc.getPrmScreenText());
+        disableButtons(ConstructionCalculator.CONV);
+        buttonView[4][1].setText("cm");
+        buttonView[4][3].setText("mm");
+    }
+
     // Process app exit initiated by pressing off button
-    public void onClickButtonOff(View view)
+    private void finishApp()
     {
         new AlertDialog.Builder(MainActivity.this)
                 .setTitle("종료")
@@ -174,19 +224,36 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    public void onClickButtonClr(View view)
+    //
+    private void printScreen()
     {
-        calc.inputKey(ConstructionCalculator.CXX);
         firstScreen.setText(calc.getPrmScreenText());
-        if (buttonsDisabled) enableButtons();
-
+        secondScreen.setText(calc.getSecScreenText());
     }
 
-    public void onClickButtonFrac(View view) {
-        calc.inputKey(ConstructionCalculator.FRAC);
-        firstScreen.setText(calc.getPrmScreenText());
-
+    //
+    public void printStairResult() {
+  /*      if (calc.prmScreenText == "getStairResult") {
+            Stair result = calc.getStairResult();
+            Intent intent = new Intent(MainActivity.this, TableActivity.class);
+            intent.putExtra("rise", result.getRise());
+            intent.putExtra("run", result.getRun());
+            intent.putExtra("riserHeight", result.getRiserHeight());
+            intent.putExtra("risers", result.getRisers());
+            intent.putExtra("riserErr", result.getRiserErr());
+            intent.putExtra("treadWidth", result.getTreadWidth());
+            intent.putExtra("treads", result.getTreads());
+            intent.putExtra("treadErr", result.getTreadErr());
+            intent.putExtra("open", result.getOpen());
+            intent.putExtra("stringer", result.getStringer());
+            intent.putExtra("incline", result.getIncline());
+            startActivity(intent);
+        }*/
     }
+
+    /*
+
+
 
     public void onClickButtonPit(View view) {
         //Intent intent = new Intent(MainActivity.this, RoofNumbersActivity.class);
@@ -215,12 +282,6 @@ public class MainActivity extends AppCompatActivity {
         firstScreen.setText(calc.getPrmScreenText());
     }
 
-    public void onClickButtonStair(View view) {
-        calc.inputKey(ConstructionCalculator.STAIR);
-        //firstScreen.setText(calc.getPrmScreenText());
-        Intent intent = new Intent(MainActivity.this, TableActivity.class);
-        startActivity(intent);
-    }
 
     public void onClickButtonArc(View view) {
         calc.inputKey(ConstructionCalculator.ARC);
@@ -260,197 +321,25 @@ public class MainActivity extends AppCompatActivity {
     //
     // Unit Conversion
     //
-    public void onClickButtonYds(View view) {
-        calc.inputKey(ConstructionCalculator.YDS);
-        firstScreen.setText(calc.getPrmScreenText());
-        if (buttonsDisabled) enableButtons();
-    }
 
-    public void onClickButtonFeet(View view) {
-        calc.inputKey(ConstructionCalculator.FEET);
-        firstScreen.setText(calc.getPrmScreenText());
-        if (buttonsDisabled) enableButtons();
-    }
 
-    public void onClickButtonInch(View view) {
-        calc.inputKey(ConstructionCalculator.INCH);
-        firstScreen.setText(calc.getPrmScreenText());
-        if (buttonsDisabled) enableButtons();
-    }
 
-    public void onClickButtonMeter(View view) {
-        calc.inputKey(ConstructionCalculator.M);
-        firstScreen.setText(calc.getPrmScreenText());
-        if (buttonsDisabled) enableButtons();
-    }
 
-    public void onClickButtonConv(View view) {
-        calc.inputKey(ConstructionCalculator.CONV);
-        firstScreen.setText(calc.getPrmScreenText());
-        disableButtons(ConstructionCalculator.CONV);
-        //disableButtons(0xf3, 0xe7, 0xf7, 0xef, 0xff);
-        ((Button)buttonView[4][1]).setText("cm");
-        ((Button)buttonView[4][3]).setText("mm");
-    }
-
-    public void onClickButtonBack(View view) {
-        calc.inputKey(ConstructionCalculator.BSP);
-        firstScreen.setText(calc.getPrmScreenText());
     }
 
 
-    // Memory keys
-    public void onClickButtonStore(View view) {
-        calc.inputKey(ConstructionCalculator.MSX);
-        firstScreen.setText(calc.getPrmScreenText());
-    }
-
-    // Memory keys
-    public void onClickButtonRcl(View view) {
-        calc.inputKey(ConstructionCalculator.MRX);
-        firstScreen.setText(calc.getPrmScreenText());
-        secondScreen.setText(calc.getSecScreenText());
-    }
-
-    // Memory keys
-    public void onClickButtonMplus(View view) {
-        calc.inputKey(ConstructionCalculator.MPX);
-        firstScreen.setText(calc.getPrmScreenText());
-        secondScreen.setText(calc.getSecScreenText());
-    }
-
-    // Arithmetic keys
-    public void onClickButtonMul(View view) {
-        calc.inputKey(ConstructionCalculator.MUL);
-        firstScreen.setText(calc.getPrmScreenText());
-        secondScreen.setText(calc.getSecScreenText());
-    }
-
-    // Arithmetic keys
-    public void onClickButtonDiv(View view) {
-        calc.inputKey(ConstructionCalculator.DIV);
-        firstScreen.setText(calc.getPrmScreenText());
-        secondScreen.setText(calc.getSecScreenText());
-    }
-
-    // Arithmetic keys
-    public void onClickButtonAdd(View view) {
-        calc.inputKey(ConstructionCalculator.ADD);
-        firstScreen.setText(calc.getPrmScreenText());
-        secondScreen.setText(calc.getSecScreenText());
-    }
-
-    // Arithmetic keys
-    public void onClickButtonSub(View view) {
-        calc.inputKey(ConstructionCalculator.SUB);
-        firstScreen.setText(calc.getPrmScreenText());
-        secondScreen.setText(calc.getSecScreenText());
-    }
-
-    // Arithmetic keys
-    public void onClickButtonEqual(View view) {
-        calc.inputKey(ConstructionCalculator.EQU);
-        firstScreen.setText(calc.getPrmScreenText());
-        secondScreen.setText(calc.getSecScreenText());
-
-    }
-
-    // Numeric
-    public void onClickButton0(View view)
-    {
-        calc.inputKey(ConstructionCalculator.DG0);
-        firstScreen.setText(calc.getPrmScreenText());
-    }
-
-    // Numeric
-    public void onClickButton1(View view)
-    {
-        calc.inputKey(ConstructionCalculator.DG1);
-        firstScreen.setText(calc.getPrmScreenText());
-    }
-
-    // Numeric
-    public void onClickButton2(View view)
-    {
-        calc.inputKey(ConstructionCalculator.DG2);
-        firstScreen.setText(calc.getPrmScreenText());
-    }
-
-    // Numeric
-    public void onClickButton3(View view)
-    {
-        calc.inputKey(ConstructionCalculator.DG3);
-        firstScreen.setText(calc.getPrmScreenText());
-    }
-
-    // Numeric
-    public void onClickButton4(View view)
-    {
-        calc.inputKey(ConstructionCalculator.DG4);
-        firstScreen.setText(calc.getPrmScreenText());
-    }
-
-    // Numeric
-    public void onClickButton5(View view)
-    {
-        calc.inputKey(ConstructionCalculator.DG5);
-        firstScreen.setText(calc.getPrmScreenText());
-    }
-
-    // Numeric
-    public void onClickButton6(View view)
-    {
-        calc.inputKey(ConstructionCalculator.DG6);
-        firstScreen.setText(calc.getPrmScreenText());
-    }
-
-    // Numeric
-    public void onClickButton7(View view)
-    {
-        calc.inputKey(buttonsDisabled ? ConstructionCalculator.CM : ConstructionCalculator.DG7);
-        firstScreen.setText(calc.getPrmScreenText());
-        if (buttonsDisabled) enableButtons();
-
-    }
-
-    // Numeric
-    public void onClickButton8(View view)
-    {
-        calc.inputKey(ConstructionCalculator.DG8);
-        firstScreen.setText(calc.getPrmScreenText());
-    }
-
-    // Numeric
-    public void onClickButton9(View view)
-    {
-        calc.inputKey(buttonsDisabled ? ConstructionCalculator.MM : ConstructionCalculator.DG9);
-        firstScreen.setText(calc.getPrmScreenText());
-        if (buttonsDisabled) enableButtons();
-
-    }
-
-    // Numeric
-    public void onClickButtonDot(View view)
-    {
-        calc.inputKey(ConstructionCalculator.DOT);
-        firstScreen.setText(calc.getPrmScreenText());
-    }
-
-    private void enableButtons()
-    {
-        int col1, col2, col3, col4, col5;
-        col1 = col2 = col3 = col4 = col5 = 0xff;
-        for (int i = 0; i < 8; i++) {
-            if ((col1 & 1) == 1) {buttonView[i][0].setClickable(true); ((Button)buttonView[i][0]).setTextColor(textColor[i][0]);}
-            if ((col2 & 1) == 1) {buttonView[i][1].setClickable(true); ((Button)buttonView[i][1]).setTextColor(textColor[i][1]);}
-            if ((col3 & 1) == 1) {buttonView[i][2].setClickable(true); ((Button)buttonView[i][2]).setTextColor(textColor[i][2]);}
-            if ((col4 & 1) == 1) {buttonView[i][3].setClickable(true); ((Button)buttonView[i][3]).setTextColor(textColor[i][3]);}
-            if ((col5 & 1) == 1) {buttonView[i][4].setClickable(true); ((Button)buttonView[i][4]).setTextColor(textColor[i][4]);}
-            col1 >>= 1;
-            col2 >>= 1;
-            col3 >>= 1;
-            col4 >>= 1;
-            col5 >>= 1;
+*/
+    private void enableButtons() {
+        int[] col = new int[5];
+        col[0] = col[1] = col[2] = col[3] = col[4] = 0xff;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 5; i++) {
+                if ((col[j] & 1) == 1) {
+                    buttonView[i][j].setClickable(true);
+                    buttonView[i][j].setTextColor(buttonTextColor[i][j]);
+                }
+                col[j] >>= 1;
+            }
         }
         ((Button)buttonView[4][1]).setText("7");
         ((Button)buttonView[4][3]).setText("9");
@@ -473,23 +362,23 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 8; i++) {
             if ((col1 & 1) == 1) {
                 buttonView[i][0].setClickable(false);
-                ((Button)buttonView[i][0]).setTextColor(Color.rgb(146, 149, 152));
+                buttonView[i][0].setTextColor(Color.rgb(146, 149, 152));
             }
             if ((col2 & 1) == 1) {
                 buttonView[i][1].setClickable(false);
-                ((Button)buttonView[i][1]).setTextColor(Color.rgb(146, 149, 152));
+                buttonView[i][1].setTextColor(Color.rgb(146, 149, 152));
             }
             if ((col3 & 1) == 1) {
                 buttonView[i][2].setClickable(false);
-                ((Button)buttonView[i][2]).setTextColor(Color.rgb(146, 149, 152));
+                buttonView[i][2].setTextColor(Color.rgb(146, 149, 152));
             }
             if ((col4 & 1) == 1) {
                 buttonView[i][3].setClickable(false);
-                ((Button)buttonView[i][3]).setTextColor(Color.rgb(146, 149, 152));
+                buttonView[i][3].setTextColor(Color.rgb(146, 149, 152));
             }
             if ((col5 & 1) == 1) {
                 buttonView[i][4].setClickable(false);
-                ((Button)buttonView[i][4]).setTextColor(Color.rgb(146, 149, 152));
+                buttonView[i][4].setTextColor(Color.rgb(146, 149, 152));
             }
             col1 >>= 1;
             col2 >>= 1;
@@ -499,4 +388,6 @@ public class MainActivity extends AppCompatActivity {
         }
         buttonsDisabled = true;
     }
+
+
 }

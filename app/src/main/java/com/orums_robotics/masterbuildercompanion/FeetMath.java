@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class FeetMath {
     // independent variable
-    private double inches;  // = inches if power is non-zero
+    private double inches;  // = inches if dim is non-zero
 
     // dependent on inches i.e. converted from inches
     private String encodedValue;
@@ -67,14 +67,14 @@ public class FeetMath {
         dim = 1;
     }
 
-    public FeetMath(String length, String unit)
-    {
-        this(Double.parseDouble(length), unit);
-    }
-
     public FeetMath(double value) {
         inches = value;
         dim = 0;
+    }
+
+    public FeetMath(String length, String unit)
+    {
+        this(Double.parseDouble(length), unit);
     }
 
     public FeetMath(double length, String unit)
@@ -133,26 +133,12 @@ public class FeetMath {
         }
     }
 
-    public double getInches()
-    {
-        return inches;
-    }
-
-    public double getMeter() { return m; }
-
-    public double getCentiMeter() { return cm; }
-
-    public double getMilliMeter() { return mm; }
-
-    public double getYds()
-    {
-        return yds;
-    }
-
-    public int getPower()
-    {
-        return dim;
-    }
+    public double getInches() 		{ return inches; }
+    public double getMeter() 		{ return m; }
+    public double getCentiMeter() 	{ return cm; }
+    public double getMilliMeter() 	{ return mm; }
+    public double getYds()			{ return yds; }
+    public int 	  getDim()			{ return dim; }
 
     // Encode decimal inch value to {feet}' {inch}" {fraction1}/{fraction2} format of String
     public String encode(double inches)
@@ -190,7 +176,10 @@ public class FeetMath {
             if (intValue2 == 16) {
                 ret += suffix + (intValue+1) + "\"";
             } else if (intValue2 != 0) {
-                ret += suffix + intValue + "\""; 		// retarded execution
+                if (intValue != 0) {
+                    ret += suffix + intValue + "\""; 		// retarded execution
+                    suffix = " ";
+                }
                 ret += suffix + intValue2 + "/16";
             }
             else {
@@ -232,13 +221,6 @@ public class FeetMath {
         return value;
     }
 
-    @Deprecated
-    public FeetMath add(double value, String unit)
-    {
-        FeetMath ret = new FeetMath(inches + toInches(value,unit), INCH);
-        ret.dim = 1;
-        return ret;
-    }
 
     public FeetMath add(FeetMath operand2)
     {
@@ -247,7 +229,7 @@ public class FeetMath {
             // Throw exception here!!!return null;
             System.out.println("Adding different dimensions is not allowed!");
         } else {
-            ret = new FeetMath(inches + operand2.inches, dim == 0 ? DEC:INCH);
+            ret = new FeetMath(inches + operand2.inches, dim == 0 ? DEC : INCH);
         }
         return ret;
     }
@@ -260,51 +242,39 @@ public class FeetMath {
             // Throw exception here!!!
             System.out.println("Subtracting different dimensions is not allowed!");
         } else {
-            if (inches - operand2.inches >= 0)
-                ret = new FeetMath(inches - operand2.inches, dim == 0 ? DEC:INCH);
-            else
-                ret = new FeetMath(operand2.inches - inches, dim == 0 ? DEC:INCH);
+            ret = new FeetMath(inches - operand2.inches, dim == 0 ? DEC : INCH);
         }
         return ret;
     }
 
-    public FeetMath subtract(double value, String unit)
-    {
-        if (inches >= toInches(value,unit))
-            return new FeetMath(inches - toInches(value,unit), INCH);
-        else
-            return new FeetMath(toInches(value,unit) - inches, INCH);
-    }
 
     public FeetMath multiply(FeetMath operand2)
     {
-        dim = dim + operand2.dim;
-        return new FeetMath(inches * operand2.inches, INCH);
+        FeetMath ret = new FeetMath(inches * operand2.inches, INCH);
+        ret.dim = dim + operand2.dim;
+        return ret;
     }
 
-    public FeetMath multiply(double value, String unit)
-    {
-        return new FeetMath(inches * toInches(value,unit), INCH);
-    }
 
     public FeetMath divide(FeetMath operand2)
     {
-        FeetMath ret = null;
-        if (dim < operand2.dim) {
+        FeetMath ret = new FeetMath(inches / operand2.inches, INCH);
+        ret.dim = dim - operand2.dim;
+
+        if (ret.dim < 0) {
             // Throw exception here!!!
-            System.out.println("Inverted unit is not allowed!");
-        }
-        else {
-            dim = dim - operand2.dim;
-            ret = new FeetMath(inches / operand2.inches, DEC);
+            System.out.println("Inverse unit is not allowed!");
+            ret = null;
         }
         return ret;
     }
 
-    public FeetMath divide(double value, String unit)
+
+    public FeetMath round()
     {
-        return new FeetMath(inches / toInches(value,unit), INCH);
+        return new FeetMath(Math.round(inches),  dim == 0 ? DEC : INCH);
     }
+
 
     // expected value format: {feet}' {inch}" {fraction1}/{fraction2}
     private Map<String,Double> decode(String valueFormatted)
@@ -414,7 +384,7 @@ public class FeetMath {
                 b.getMilliMeter(),
                 b.getYds()));
 
-        FeetMath c = a.add(10,INCH);
+        FeetMath c = a.add(new FeetMath(10,INCH));
         System.out.println("c:\n"+MessageFormat.format(format,
                 c,
                 c.getInches(),
@@ -423,7 +393,7 @@ public class FeetMath {
                 c.getMilliMeter(),
                 c.getYds()));
 
-        FeetMath d = a.multiply(10,INCH);
+        FeetMath d = a.multiply(new FeetMath(10,INCH));
         System.out.println("d:\n"+MessageFormat.format(format,
                 d,
                 d.getInches(),
@@ -432,7 +402,7 @@ public class FeetMath {
                 d.getMilliMeter(),
                 d.getYds()));
 
-        FeetMath e = new FeetMath(a.getInches(),INCH).add(0.1, INCH);
+        FeetMath e = new FeetMath(a.getInches(),INCH); //.add(new FeetMath(0.1, INCH));
         System.out.println("e:\n"+MessageFormat.format(format,
                 e,
                 e.getInches(),

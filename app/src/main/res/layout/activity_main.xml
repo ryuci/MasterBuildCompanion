@@ -84,8 +84,7 @@
             android:text="Off"
             android:textAllCaps="false"
             android:id="@+id/button_off"
-            android:visibility="visible"
-            android:onClick="onClickButtonOff" />
+            android:visibility="visible" />
 
         <Button
             android:layout_width="50dp"
@@ -95,8 +94,7 @@
             android:textColor="#3e3942"
             android:textSize="20sp"
             android:text="C"
-            android:id="@+id/button_c"
-            android:onClick="onClickButtonClr" />
+            android:id="@+id/button_c" />
     </LinearLayout>
 
     <LinearLayout
@@ -121,7 +119,6 @@
             android:textSize="20sp"
             android:text="Pit"
             android:id="@+id/button_pitch"
-            android:onClick="onClickButtonPit"
             android:textAllCaps="false" />
 
         <Button
@@ -133,7 +130,6 @@
             android:textSize="20sp"
             android:text="Rise"
             android:id="@+id/button_rise"
-            android:onClick="onClickButtonRise"
             android:textAllCaps="false" />
 
         <Button
@@ -145,7 +141,6 @@
             android:textSize="20sp"
             android:text="Run"
             android:id="@+id/button_run"
-            android:onClick="onClickButtonRun"
             android:textAllCaps="false" />
 
         <Button
@@ -157,7 +152,6 @@
             android:textSize="20sp"
             android:text="Diag"
             android:id="@+id/button_diag"
-            android:onClick="onClickButtonDiag"
             android:textAllCaps="false" />
 
         <Button
@@ -169,7 +163,6 @@
             android:textSize="20sp"
             android:text="Hip/V"
             android:id="@+id/button_hipV"
-            android:onClick="onClickButtonHipV"
             android:textAllCaps="false" />
     </LinearLayout>
 
@@ -191,7 +184,6 @@
             android:text="C/M"
             android:id="@+id/button_comp"
             android:elegantTextHeight="false"
-            android:onClick="onClickButtonComp"
             android:textAllCaps="false" />
 
         <Button
@@ -203,7 +195,6 @@
             android:textSize="20sp"
             android:text="Stair"
             android:id="@+id/button_stair"
-            android:onClick="onClickButtonStair"
             android:textAllCaps="false" />
 
         <Button
@@ -215,7 +206,6 @@
             android:textSize="20sp"
             android:text="Arc"
             android:id="@+id/button_arc"
-            android:onClick="onClickButtonArc"
             android:textAllCaps="false" />
 
         <Button
@@ -227,7 +217,6 @@
             android:textSize="20sp"
             android:text="Circ"
             android:id="@+id/button_circ"
-            android:onClick="onClickButtonCirc"
             android:textAllCaps="false" />
 
         <Button
@@ -239,7 +228,6 @@
             android:textSize="20sp"
             android:text="Jack"
             android:id="@+id/button_jack"
-            android:onClick="onClickButtonJack"
             android:textAllCaps="false" />
     </LinearLayout>
 
@@ -261,7 +249,6 @@
             android:text="m"
             android:id="@+id/button_m"
             android:elegantTextHeight="false"
-            android:onClick="onClickButtonMeter"
             android:textAllCaps="false" />
 
         <Button
@@ -273,7 +260,6 @@
             android:textSize="20sp"
             android:text="Len"
             android:id="@+id/button_length"
-            android:onClick="onClickButtonLength"
             android:textAllCaps="false" />
 
         <Button
@@ -285,7 +271,6 @@
             android:textSize="20sp"
             android:text="Wid"
             android:id="@+id/button_width"
-            android:onClick="onClickButtonWidth"
             android:textAllCaps="false" />
 
         <Button
@@ -297,7 +282,6 @@
             android:textSize="20sp"
             android:text="Hgt"
             android:id="@+id/button_height"
-            android:onClick="onClickButtonHeight"
             android:textAllCaps="false" />
 
         <Button
@@ -309,7 +293,6 @@
             android:textSize="20sp"
             android:text=" % "
             android:id="@+id/button_percent"
-            android:onClick="onClickButtonPercent"
             android:textAllCaps="false" />
     </LinearLayout>
 
@@ -331,7 +314,6 @@
             android:text="Yds"
             android:id="@+id/button_yds"
             android:elegantTextHeight="false"
-            android:onClick="onClickButtonYds"
             android:textAllCaps="false" />
 
         <Button
@@ -343,7 +325,6 @@
             android:textSize="20sp"
             android:text="Feet"
             android:id="@+id/button_feet"
-            android:onClick="onClickButtonFeet"
             android:textAllCaps="false" />
 
         <Button
@@ -355,7 +336,6 @@
             android:textSize="20sp"
             android:text="Inch"
             android:id="@+id/button_inch"
-            android:onClick="onClickButtonInch"
             android:textAllCaps="false" />
 
         <Button
@@ -366,8 +346,7 @@
             android:textColor="#3e3942"
             android:textSize="20sp"
             android:text="/"
-            android:id="@+id/button_to"
-            android:onClick="onClickButtonFrac" />
+            android:id="@+id/button_to" />
 
         <Button
             android:layout_width="50dp"
@@ -377,8 +356,7 @@
             android:textColor="#3e3942"
             android:textSize="20sp"
             android:text="←"
-            android:id="@+id/button_back"
-            android:onClick="onClickButtonBack" />
+            android:id="@+id/button_back" />
     </LinearLayout>
 
     <LinearLayout
@@ -399,7 +377,6 @@
             android:text="Conv"
             android:id="@+id/button_conv"
             android:elegantTextHeight="false"
-            android:onClick="onClickButtonConv"
             android:textAllCaps="false" />
 
         <Button
@@ -411,8 +388,7 @@
             android:textSize="20sp"
             android:text="7"
             android:id="@+id/button_7"
-            android:textAllCaps="false"
-            android:onClick="onClickButton7" />
+            android:textAllCaps="false"/>
 
         <Button
             android:layout_width="50dp"
@@ -424,8 +400,7 @@
             android:text="8"
             android:id="@+id/button_8"
             android:textAllCaps="false"
-            android:onClick="onClickButton8" />
-
+/>
         <Button
             android:layout_width="50dp"
             android:layout_height="45dp"
@@ -436,8 +411,7 @@
             android:text="9"
             android:id="@+id/button_9"
             android:textAllCaps="false"
-            android:onClick="onClickButton9" />
-
+/>
         <Button
             android:layout_width="50dp"
             android:layout_height="45dp"
@@ -447,8 +421,7 @@
             android:textSize="20sp"
             android:text="\u00F7"
             android:id="@+id/button_div"
-            android:onClick="onClickButtonDiv" />
-    </LinearLayout>
+  />  </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -468,7 +441,6 @@
             android:text="Stor"
             android:id="@+id/button_store"
             android:elegantTextHeight="false"
-            android:onClick="onClickButtonStore"
             android:textAllCaps="false" />
 
         <Button
@@ -480,9 +452,7 @@
             android:textSize="20sp"
             android:text="4"
             android:id="@+id/button_4"
-            android:textAllCaps="false"
-            android:onClick="onClickButton4" />
-
+            android:textAllCaps="false"/>
         <Button
             android:layout_width="50dp"
             android:layout_height="45dp"
@@ -492,8 +462,7 @@
             android:textSize="20sp"
             android:text="5"
             android:id="@+id/button_5"
-            android:textAllCaps="false"
-            android:onClick="onClickButton5" />
+            android:textAllCaps="false"/>
 
         <Button
             android:layout_width="50dp"
@@ -504,8 +473,7 @@
             android:textSize="20sp"
             android:text="6"
             android:id="@+id/button_6"
-            android:textAllCaps="false"
-            android:onClick="onClickButton6" />
+            android:textAllCaps="false"/>
 
         <Button
             android:layout_width="50dp"
@@ -516,7 +484,6 @@
             android:textSize="20sp"
             android:text="\u00D7"
             android:id="@+id/button_mul"
-            android:onClick="onClickButtonMul"
             />
     </LinearLayout>
 
@@ -538,7 +505,6 @@
             android:text="Rcl"
             android:id="@+id/button_rcl"
             android:elegantTextHeight="false"
-            android:onClick="onClickButtonRcl"
             android:textAllCaps="false" />
 
         <Button
@@ -550,8 +516,7 @@
             android:textSize="20sp"
             android:text="1"
             android:id="@+id/button_1"
-            android:textAllCaps="false"
-            android:onClick="onClickButton1" />
+            android:textAllCaps="false" />
 
         <Button
             android:layout_width="50dp"
@@ -562,9 +527,7 @@
             android:textSize="20sp"
             android:text="2"
             android:id="@+id/button_2"
-            android:textAllCaps="false"
-            android:onClick="onClickButton2" />
-
+            android:textAllCaps="false"/>
         <Button
             android:layout_width="50dp"
             android:layout_height="45dp"
@@ -574,8 +537,7 @@
             android:textSize="20sp"
             android:text="3"
             android:id="@+id/button_3"
-            android:textAllCaps="false"
-            android:onClick="onClickButton3" />
+            android:textAllCaps="false"/>
 
         <Button
             android:layout_width="50dp"
@@ -585,8 +547,7 @@
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:text="\u2212"
-            android:id="@+id/button_sub"
-            android:onClick="onClickButtonSub" />
+            android:id="@+id/button_sub"/>
     </LinearLayout>
 
     <LinearLayout
@@ -606,7 +567,6 @@
             android:textSize="20sp"
             android:text="M+"
             android:id="@+id/button_mplus"
-            android:onClick="onClickButtonMplus"
             android:textAllCaps="false" />
 
         <Button
@@ -618,8 +578,7 @@
             android:textSize="20sp"
             android:text="0"
             android:id="@+id/button_0"
-            android:textAllCaps="false"
-            android:onClick="onClickButton0" />
+            android:textAllCaps="false"/>
 
         <Button
             android:layout_width="50dp"
@@ -630,8 +589,7 @@
             android:textSize="20sp"
             android:text="."
             android:id="@+id/button_dot"
-            android:textAllCaps="false"
-            android:onClick="onClickButtonDot" />
+            android:textAllCaps="false"/>
 
         <Button
             android:layout_width="50dp"
@@ -642,8 +600,7 @@
             android:textSize="20sp"
             android:text="="
             android:id="@+id/button_equal"
-            android:textAllCaps="false"
-            android:onClick="onClickButtonEqual" />
+            android:textAllCaps="false"/>
 
         <Button
             android:layout_width="50dp"
@@ -654,8 +611,7 @@
             android:textSize="20sp"
             android:text="+"
             android:id="@+id/button_add"
-            android:textAllCaps="false"
-            android:onClick="onClickButtonAdd" />
+            android:textAllCaps="false"/>
     </LinearLayout>
 
 

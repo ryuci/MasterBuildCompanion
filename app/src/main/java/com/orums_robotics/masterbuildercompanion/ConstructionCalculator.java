@@ -46,6 +46,8 @@ public class ConstructionCalculator extends Calculator {
     private FeetMath lastSto;
     private String statusTxt;
 
+    private Stair stairResult;
+    private Roof roofResult;
 
     //======================================================================
     // [FUNC] Primary class constructor.
@@ -135,61 +137,24 @@ public class ConstructionCalculator extends Calculator {
     public void inputKey(String key) {
         switch (mode) {
             case DEC:
-                if (key == FEET) {
-                    mode = FEET;
-                    prmScreenText += "' ";
-                }
-                else if (key == INCH) {
-                    mode = FEET;
-                    prmScreenText += "\" ";
-                }
-                else if (key == FRAC) {
-                    mode = FEET;
-                    prmScreenText += "/";
-                }
-                else if (key == M) {
-                    mode = M;
-                    prmScreenText += "m";
-                }
-                else if (key == YDS) {
-                    mode = YDS;
-                    prmScreenText += "yds";
-                }
-                else if (key == CXX) {
-                    super.inputKey(key);
-                    initFields();
-                }
+                if (key == FEET)        { mode = FEET; prmScreenText += "' "; }
+                else if (key == INCH)   { mode = FEET; prmScreenText += "\" "; }
+                else if (key == FRAC)   { mode = FEET; prmScreenText += "/"; }
+                else if (key == M)      { mode = M; prmScreenText += "m"; }
+                else if (key == YDS)    { mode = YDS; prmScreenText += "yds"; }
+                else if (key == CXX)    { super.inputKey(key); initFields(); }
                 else if (key == EQU) {
                     super.inputKey(key);
                     switch (lastMode) {
-                        case FEET:
-                            prmScreenText = new FeetMath(prmScreenText, INCH).toString();
-                            mode = lastMode;
-                            break;
-                        case INCH:
-                            prmScreenText += new FeetMath(prmScreenText, INCH).getInches() + "\"";
-                            mode = lastMode;
-                            break;
-                        case M:
-                            prmScreenText += new FeetMath(prmScreenText, INCH).getMeter() + "m";
-                            mode = lastMode;
-                            break;
-                        case CM:
-                            prmScreenText += new FeetMath(prmScreenText, INCH).getCentiMeter() + "cm";
-                            mode = lastMode;
-                            break;
-                        case MM:
-                            prmScreenText += new FeetMath(prmScreenText, INCH).getMilliMeter() + "mm";
-                            mode = lastMode;
-                            break;
-                        case YDS:
-                            prmScreenText += new FeetMath(prmScreenText, INCH).getYds() + "yds";
-                            mode = lastMode;
-                            break;
+                        case FEET:  prmScreenText = new FeetMath(prmScreenText, INCH).toString(); mode = lastMode; break;
+                        case INCH:  prmScreenText += new FeetMath(prmScreenText, INCH).getInches() + "\""; mode = lastMode; break;
+                        case M:     prmScreenText += new FeetMath(prmScreenText, INCH).getMeter() + "m"; mode = lastMode; break;
+                        case CM:    prmScreenText += new FeetMath(prmScreenText, INCH).getCentiMeter() + "cm"; mode = lastMode; break;
+                        case MM:    prmScreenText += new FeetMath(prmScreenText, INCH).getMilliMeter() + "mm"; mode = lastMode; break;
+                        case YDS:   prmScreenText += new FeetMath(prmScreenText, INCH).getYds() + "yds"; mode = lastMode; break;
                     }
                 }
-                else
-                    super.inputKey(key);
+                else super.inputKey(key);
                 break;
             case FEET:
                 if (isOp(key)) {
